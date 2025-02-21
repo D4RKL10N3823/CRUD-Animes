@@ -119,8 +119,28 @@ async function eliminarAnime(id) {
 
 document.getElementById('aplicar-filtros').addEventListener('click', () => {
     const genero = document.getElementById('filtro-genero').value;
+    const buscar = document.getElementById('buscar').value;
 
-    cargarAnimes({ genero });
+    cargarAnimes({ genero, buscar });
 });
 
+document.getElementById('buscar').addEventListener('input', async (e) => {
+    const query = e.target.value;
+    if (query.length < 2) return;
+
+    const response = await fetch(`/animes?search=${query}`);
+    const animes = await response.json();
+    const sugerencias = document.getElementById('sugerencias-busqueda');
+    sugerencias.innerHTML = '';
+
+    animes.forEach(anime => {
+        const sugerencia = document.createElement('div');
+        sugerencia.textContent = anime.titulo;
+        sugerencia.onclick = () => {
+            document.getElementById('buscar').value = anime.titulo;
+            sugerencias.innerHTML = '';
+        };
+        sugerencias.appendChild(sugerencia);
+    });
+});
 cargarAnimes();
