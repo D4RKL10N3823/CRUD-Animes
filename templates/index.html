@@ -40,6 +40,36 @@
             </form>
         </section>
 
+        <div id="modal-editar" class="modal">
+            <div class="contenido-modal">
+                <span class="cerrar" onclick="cerrarModal()">&times;</span>
+                <h2>Editar Anime</h2>
+                <form id="formulario-editar-anime">
+                    <div class="grupo-formulario">
+                        <label for="editar-titulo">Título</label>
+                        <input type="text" id="editar-titulo" required>
+                    </div>
+                    <div class="grupo-formulario">
+                        <label for="editar-genero">Género</label>
+                        <input type="text" id="editar-genero" required>
+                    </div>
+                    <div class="grupo-formulario">
+                        <label for="editar-episodios">Episodios</label>
+                        <input type="number" id="editar-episodios" required>
+                    </div>
+                    <div class="grupo-formulario">
+                        <label for="editar-anio-lanzamiento">Año de Lanzamiento</label>
+                        <input type="number" id="editar-anio-lanzamiento" required>
+                    </div>
+                    <div class="grupo-formulario">
+                        <label for="editar-descripcion">Descripción</label>
+                        <textarea id="editar-descripcion"></textarea>
+                    </div>
+                    <button type="submit" class="btn">Guardar Cambios</button>
+                </form>
+            </div>
+        </div>
+
         <section class="seccion-lista-animes">
             <h2>Lista de Animes</h2>
             <div id="lista-animes" class="lista-animes"></div>

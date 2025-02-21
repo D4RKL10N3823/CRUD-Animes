@@ -54,4 +54,56 @@ async function cargarAnimes(filters = {}) {
     });
 }
 
+function editarAnime(id) {
+    currentEditId = id;
+    fetch(`/animes/${id}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(anime => {
+            document.getElementById('editar-titulo').value = anime.titulo;
+            document.getElementById('editar-genero').value = anime.genero;
+            document.getElementById('editar-episodios').value = anime.episodios;
+            document.getElementById('editar-anio-lanzamiento').value = anime.anio_lanzamaiento;
+            document.getElementById('editar-descripcion').value = anime.descripcion;
+            document.getElementById('modal-editar').style.display = 'block';
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
+}
+
+document.getElementById('formulario-editar-anime').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const data = {
+        titulo: document.getElementById('editar-titulo').value,
+        genero: document.getElementById('editar-genero').value,
+        episodios: document.getElementById('editar-episodios').value,
+        anio_lanzamaiento: document.getElementById('editar-anio-lanzamiento').value,
+        descripcion: document.getElementById('editar-descripcion').value,
+    };
+
+    const response = await fetch(`/animes/${currentEditId}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+    });
+
+    if (response.ok) {
+        toastr.success('Anime actualizado con éxito');
+        document.getElementById('modal-editar').style.display = 'none';
+        cargarAnimes();
+    } else {
+        const result = await response.json();
+        toastr.error(result.msg);
+    }
+});
+
+function cerrarModal() {
+    document.getElementById('modal-editar').style.display = 'none';
+}
+
 cargarAnimes();

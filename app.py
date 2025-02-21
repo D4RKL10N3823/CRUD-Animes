@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify, render_template
 from data.models import db
-from business.services import crear_anime, existe_anime, obtener_todos_los_animes
+from business.services import crear_anime, existe_anime, obtener_todos_los_animes, obtener_anime_por_id, actualizar_animes
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///animes.db'
@@ -31,6 +31,24 @@ def api_obtener_todos_los_animes():
         'anio_lanzamaiento': anime.anio_lanzamaiento,
         'descripcion': anime.descripcion
     } for anime in animes])
+
+@app.route('/animes/<int:anime_id>', methods=['GET'])
+def api_obtener_anime(anime_id):
+    anime = obtener_anime_por_id(anime_id)
+    return jsonify({
+        'id': anime.id,
+        'titulo': anime.titulo,
+        'genero': anime.genero,
+        'episodios': anime.episodios,
+        'anio_lanzamaiento': anime.anio_lanzamaiento,
+        'descripcion': anime.descripcion
+    })
+
+@app.route('/animes/<int:anime_id>', methods=['PUT'])
+def api_actualizar_anime(anime_id):
+    data = request.json
+    actualizar_anime = actualizar_animes(anime_id, data)
+    return jsonify({'msg': 'Anime Actualizado', 'id': actualizar_anime.id})
 
 if __name__ == '__main__':
     with app.app_context():
