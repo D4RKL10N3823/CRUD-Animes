@@ -106,4 +106,21 @@ function cerrarModal() {
     document.getElementById('modal-editar').style.display = 'none';
 }
 
+async function eliminarAnime(id) {
+    const response = await fetch(`/animes/${id}`, { method: 'DELETE' });
+    if (response.ok) {
+        toastr.error('Anime eliminado');
+        cargarAnimes();
+    } else {
+        const result = await response.json();
+        toastr.error(result.msg);
+    }
+}
+
+document.getElementById('aplicar-filtros').addEventListener('click', () => {
+    const genero = document.getElementById('filtro-genero').value;
+
+    cargarAnimes({ genero });
+});
+
 cargarAnimes();

@@ -110,6 +110,32 @@ textarea {
     cursor: pointer;
 }
 
+/* Seccion Filtros */
+.seccion-filtros {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.seccion-filtros h2 {
+    margin-bottom: 1rem;
+}
+
+.filtros {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.filtros input,
+.filtros select {
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
 /* Lista animes */
 .seccion-lista-animes {
     background: white;
