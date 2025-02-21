@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify, render_template
 from data.models import db
-from business.services import crear_anime, existe_anime, obtener_todos_los_animes, obtener_anime_por_id, actualizar_animes
+from business.services import crear_anime, existe_anime, obtener_todos_los_animes, obtener_anime_por_id, actualizar_animes, eliminar_anime, filtrar_animes_por_genero
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///animes.db'
@@ -21,6 +21,11 @@ def api_crear_anime():
 
 @app.route('/animes', methods=['GET'])
 def api_obtener_todos_los_animes():
+    genero = request.args.get('genero')
+
+    if genero:
+        animes = filtrar_animes_por_genero(genero)
+
     animes = obtener_todos_los_animes()
 
     return jsonify([{
@@ -49,6 +54,11 @@ def api_actualizar_anime(anime_id):
     data = request.json
     actualizar_anime = actualizar_animes(anime_id, data)
     return jsonify({'msg': 'Anime Actualizado', 'id': actualizar_anime.id})
+
+@app.route('/animes/<int:anime_id>', methods=['DELETE'])
+def api_eliminar_anime(anime_id):
+    eliminar_anime(anime_id)
+    return jsonify({'msg': 'Anime Eliminado'})
 
 if __name__ == '__main__':
     with app.app_context():

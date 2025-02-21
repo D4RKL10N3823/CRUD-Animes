@@ -30,3 +30,12 @@ def actualizar_animes(anime_id, data):
     anime.descripcion = data.get('descripcion', '')
     db.session.commit()
     return anime
+
+def eliminar_anime(anime_id):
+    anime = obtener_anime_por_id(anime_id)
+    db.session.delete(anime)
+    db.session.commit()
+    return anime
+
+def filtrar_animes_por_genero(genero):
+    return Anime.query.filter_by(genero=genero).all()
