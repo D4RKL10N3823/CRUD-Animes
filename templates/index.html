@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anime CRUD</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/toastr.min.css">
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Gestor de Animes</h1>
+    </header>
+    <main>
+        <section class="seccion-formulario">
+            <h2>Agregar Nuevo Anime</h2>
+            <form id="formulario-anime">
+                <div class="grupo-formulario">
+                    <label for="titulo">Título</label>
+                    <input type="text" id="titulo" placeholder="Ej. Naruto" required>
+                </div>
+                <div class="grupo-formulario">
+                    <label for="genero">Género</label>
+                    <input type="text" id="genero" placeholder="Ej. Acción" required>
+                </div>
+                <div class="grupo-formulario">
+                    <label for="episodios">Episodios</label>
+                    <input type="number" id="episodios" placeholder="Ej. 220" required>
+                </div>
+                <div class="grupo-formulario">
+                    <label for="anio-lanzamiento">Año de Lanzamiento</label>
+                    <input type="number" id="anio-lanzamiento" placeholder="Ej. 2002" required>
+                </div>
+                <div class="grupo-formulario">
+                    <label for="descripcion">Descripción</label>
+                    <textarea id="descripcion" placeholder="Ej. Un ninja busca convertirse en Hokage..."></textarea>
+                </div>
+                <button type="submit" class="btn">Agregar Anime</button>
+            </form>
+        </section>
+
+        <section class="seccion-lista-animes">
+            <h2>Lista de Animes</h2>
+            <div id="lista-animes" class="lista-animes"></div>
+        </section>
+    </main>
+
+    <footer>
+        <p>CRUD de Animes</p>
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="/static/js/toastr.js"></script>
+    <script src="/static/js/toastr.min.js"></script>
+    
+    <script src="/static/js/script.js"></script>
+</body>
+</html>
