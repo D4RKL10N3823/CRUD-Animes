@@ -24,12 +24,12 @@ def api_obtener_todos_los_animes():
     genero = request.args.get('genero')
     keyword = request.args.get('buscar')
 
+    animes = obtener_todos_los_animes()
+
     if genero:  
         animes = filtrar_animes_por_genero(genero)
     if keyword: 
         animes = buscar_animes(keyword) 
-
-    animes = obtener_todos_los_animes()
 
     return jsonify([{
         'id': anime.id,
