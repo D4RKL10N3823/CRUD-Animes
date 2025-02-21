@@ -136,6 +136,26 @@ textarea {
     font-size: 1rem;
 }
 
+#sugerencias-busqueda {
+    position: absolute;
+    background: white;
+    border-radius: 4px;
+    max-height: 200px;
+    overflow-y: auto;
+    width: calc(100% - 2rem);
+    margin-top: 3.5rem;
+    z-index: 1000;
+}
+
+#sugerencias-busqueda div {
+    padding: 0.5rem;
+    cursor: pointer;
+}
+
+#sugerencias-busqueda div:hover {
+    background-color: #f0f0f0;
+}
+
 /* Lista animes */
 .seccion-lista-animes {
     background: white;

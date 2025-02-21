@@ -39,3 +39,8 @@ def eliminar_anime(anime_id):
 
 def filtrar_animes_por_genero(genero):
     return Anime.query.filter_by(genero=genero).all()
+
+def buscar_animes(keyword):
+    return Anime.query.filter(
+        (Anime.titulo.ilike(f"%{keyword}%")) | (Anime.genero.ilike(f"%{keyword}%"))
+    ).all()
